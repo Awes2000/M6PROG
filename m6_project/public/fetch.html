@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script defer type="text/javascript" src="assets/js/appFetch.js"></script>
+  </head>
+  <body>
+    <form id="getForm" action="fetchGet.php"></form>
+    <label for="article">Article:</label>
+    <input type="text" name="article" />
+    <label for="maxPrice">Max price:</label>
+    <input type="text" name="maxPrice" />
+    <input type="submit" />
+
+    <form id="postForm" action="fetchPost.php">
+      <label for="article">Article:</label>
+      <input type="text" name="article" />
+      <label for="maxPrice">Max price:</label>
+      <input type="text" name="maxPrice" />
+      <input type="submit" />
+    </form>
+  </body>
+</html>
