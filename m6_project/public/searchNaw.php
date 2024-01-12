@@ -3,6 +3,7 @@
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+header('Content-Type: application/json; charset=utf=8');
 
 // Verkrijg de waarde vanuit het formulier (bijvoorbeeld via $_GET)
 $searchInput = isset($_GET['searchPersoon']) ? $_GET['searchPersoon'] : '';
@@ -17,7 +18,8 @@ $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_SCHEMA);
 
 // Controleer de verbinding
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    echo json_encode(['error' => "Connection failed: " . $conn->connect_error]);
+    exit;
 }
 
 // Voer hier de rest van je code uit...
@@ -28,7 +30,7 @@ $searchResults = FindPersoon($conn, $searchInput);
 echo json_encode($searchResults);
 $conn->close();
 
-header('Content-Type: application/json; charset=utf=8');
+
 
 
 
