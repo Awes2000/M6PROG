@@ -11,8 +11,7 @@ $searchInput = isset($_GET['searchPersoon']) ? $_GET['searchPersoon'] : '';
 // Voer hier de rest van je PHP-code in
 // ...
 
-require_once '../source/config.php';
-include_once("../source/database.php");
+
 
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_SCHEMA);
 
