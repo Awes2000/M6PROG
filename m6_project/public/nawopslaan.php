@@ -94,4 +94,14 @@ if ($valid) {
     // Sluit de databaseverbinding
     $conn->close();
 }
-?>
+
+header('Content-Type: application/json');
+
+$inputJSON = file_get_contents('php://input');
+$_POST = json_decode($inputJSON, true);
+
+// Je validatie- en verwerkingslogica hier...
+
+$response = ['status' => 'success', 'message' => 'Gegevens succesvol opgeslagen!'];
+echo json_encode($response);
+
