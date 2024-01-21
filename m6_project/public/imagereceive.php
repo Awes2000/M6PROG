@@ -8,11 +8,9 @@ function insertImageInDb($conn, $filename, $size, $type, $link) {
     return $stmt->execute([$filename, $size, $type, $link]);
 }
 
-function handleFile($conn, $file) {
-    $response = ["succeeded" => false, "message" => ""];
+function handleFile($conn, $file, $link) {
+    $response = ["succeeded" => false, "message" => "", "downloadlink" => null];
     
-    // Genereer een unieke bestandsnaam en stel het pad in
-    $link = uniqid();
     $location = $file["tmp_name"];
     $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
     $filename = "../uploads/" . $link . "." . $ext;
@@ -34,12 +32,20 @@ function handleFile($conn, $file) {
     return $response;
 }
 
+function createLink($fileid) {
+    return $_SERVER['HTTP_HOST'] . "/imagedownload.php?fileid=" . $fileid;
+}
+
 // Maak de database verbinding
 $conn = database_connect();
 
 // Controleer of er een bestand is geüpload
 if ($_FILES && $_FILES["image"]["error"] === 0) {
-    $response = handleFile($conn, $_FILES["image"]);
+    $link = uniqid();
+    $response = handleFile($conn, $_FILES["image"], $link);
+    if ($response["succeeded"]) {
+        $response["downloadlink"] = createLink($link);
+    }
 } else {
     $response = ["succeeded" => false, "message" => "No file uploaded or error during upload"];
 }
