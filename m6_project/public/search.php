@@ -18,3 +18,20 @@ $result = $stmt->get_result();
 while ($weersomstandigheden = mysqli_fetch_assoc($result)) {
     var_dump($weersomstandigheden);
 };
+
+function FindImage($conn, $id) {
+    $query = "SELECT file_path FROM imagetable WHERE file_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = [];
+    
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
+    
+    $stmt->close();
+    return $data;
+}
+
