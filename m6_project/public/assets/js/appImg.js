@@ -22,6 +22,31 @@ function uploadFormFile(form) {
 
   fetch("imagereceive.php", options)
     .then((response) => response.json())
-    .then((data) => console.log(data))
+    .then((data) => {
+      showLink(data);
+      console.log(data);
+    })
     .catch((error) => console.error("Error:", error));
+}
+
+function showLink(json) {
+  console.log("showLink aangeroepen", json);
+  if (json.downloadlink) {
+    let linkElement = document.getElementById("link");
+    linkElement.style.display = "block";
+    linkElement.setAttribute("href", "http://" + json.downloadlink);
+    linkElement.textContent = "Download het plaatje";
+
+    generateQRCode(json.downloadlink);
+  }
+}
+
+function generateQRCode(url) {
+  let qrContainer = document.getElementById("qrcode");
+  qrContainer.innerHTML = "";
+  new QRCode(qrContainer, {
+    text: url,
+    width: 128,
+    height: 128,
+  });
 }

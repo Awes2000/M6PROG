@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>imageupload</title>
+
+    <script
+      src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"
+      defer
+    ></script>
+    <script src="assets/js/appImg.js" defer></script>
   </head>
   <body>
     <form
@@ -16,5 +22,7 @@
       <input type="file" accept=".png" id="image" name="image" value="" /><br />
       <input type="submit" value="upload" />
     </form>
+    <a id="link" href="#">Download het plaatje</a>
+    <p id="qrcode"></p>
   </body>
 </html>
